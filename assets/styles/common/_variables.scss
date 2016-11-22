@@ -1,0 +1,51 @@
+// Grid settings
+$enable-flex:           true;
+$main-sm-columns:       12;
+$sidebar-sm-columns:    4;
+
+// Colors
+$brand-primary:         red;
+$black:					#262626;
+$gray-dark:             #363636;
+$gray:                  #484747;
+$gray-light:            #808080;
+$gray-lighter:          #b4b4b4;
+$gray-lightest:         #f6f6f6;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg: $gray-lightest;
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif: "Open Sans", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-serif:      "Roboto Slab", Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base:       $font-family-sans-serif;
+
+// Header sizes
+$font-size-h1: rem(73);
+$font-size-h2: rem(73);
+$font-size-h3: rem(30);
+$font-size-h4: rem(28);
+$font-size-h5: rem(24);
+$font-size-h6: rem(20);
+
+// $headings-margin-bottom: ($spacer / 2);
+$headings-font-family:   $font-family-serif;
+$headings-font-weight:   500;
+$headings-line-height:   1.1;
+$headings-color:         inherit;
+
+// Links
+//
+// Style anchor elements.
+
+$link-color:            $brand-primary;
+$link-decoration:       none;
+$link-hover-color:      lighten($link-color, 15%);
+$link-hover-decoration: none;

@@ -1,0 +1,120 @@
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+@mixin get-ratio($n){
+	height: 0% + ((1 / $n) * 100);
+}
+
+@mixin get-aspect-padding($n) {
+	padding-bottom: 0% + (100 / $n);
+	height: 0;
+}
+
+@mixin grid-border( $excludex: false, $excludey: false ) {
+	border: rem-calc(2) solid $white;
+	@if( $excludex ) {
+		border-#{$excludex}-width: 0;
+	}
+	@if( $excludey ) {
+		border-#{$excludey}-width: 0;
+	}
+}
+
+@mixin pskern( $photoshop-value, $centered: false ) {
+	$value: 0em + ( $photoshop-value / 1000 );
+	letter-spacing: $value;
+	@if ($centered) {
+		text-indent: $value;
+	}
+	
+}
+
+@mixin display-flex() {
+	display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;      /* TWEENER - IE 10 */
+	display: -webkit-flex;     /* NEW - Chrome */
+	display: flexbox;
+	display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-value($n, $width: false) {
+	-webkit-box-flex: $n;      /* OLD - iOS 6-, Safari 3.$n-6 */
+	-moz-box-flex: $n;         /* OLD - Firefox $n9- */
+	-webkit-flex: $n;          /* Chrome */
+	-ms-flex: $n;              /* IE $n0 */
+	flex: $n;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+	@if $width {
+		width: $width; 
+	}
+}
+
+@mixin flex-order($order) {
+	-webkit-box-ordinal-group: $order;  
+	-moz-box-ordinal-group: $order;     
+	-ms-flex-order: $order;     
+	-webkit-order: $order;  
+	order: $order;
+}
+
+@mixin darken-background($color: #a0a0a0, $mode: multiply) {
+	background-color: $color;
+	background-blend-mode: $mode;
+}
+
+@mixin text-like-input {
+	&[type="text"], &[type="password"], &[type="date"], &[type="datetime"], &[type="datetime-local"],
+	&[type="month"], &[type="week"], &[type="email"], &[type="number"], &[type="search"],
+	&[type="tel"], &[type="time"], &[type="url"], &[type="color"] {
+		@content;
+	}
+}
+
+@mixin bg-image-block($min-width: 2140px) {
+	.bg-image {
+		position: absolute;
+		left: 50%;
+		top: 0;
+		width: $min-width;
+		height: 100%;
+		margin-left: -$min-width / 2;
+		background-blend-mode: multiply;
+		@include breakpoint($min-width) {
+			left: 50%;
+			width: 100vw;
+			margin-left: -50vw;
+		}
+	}
+}
+
+@mixin placeholder {
+	&::-webkit-input-placeholder {@content}
+	&:-moz-placeholder {@content}
+	&::-moz-placeholder {@content}
+	&:-ms-input-placeholder {@content}
+}
+

@@ -1,0 +1,51 @@
+// =============================================================================
+// Baseline Function
+// =============================================================================
+
+$baseline: 24 !default;
+@function bl($n: 1) {
+  @return rem-calc($baseline * $n);
+}
+
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+// =============================================================================
+// Viewport Width Calc
+// =============================================================================
+@function vw-calc($size, $vw: $vw-baseline) {
+  $output: 0vw + (($size / $vw) * 100);
+  @return $output;
+}
+
+// =============================================================================
+// Photoshop Kerning Converter
+// =============================================================================
+@function kern($photoshop-value) {
+  @return 0em + ( $photoshop-value / 1000 );
+}
+
+// =================
+// Global Transition
+// =================
+@function globtrans( $attr ) {
+  @return $attr 0.4s ease 0s;
+}
+
+// ================
+// Get Header Sizes
+// ================
+@function header-size($breakpoint, $size) {
+  @return rem-calc(map-get(map-get($header-sizes, $breakpoint), $size) * 1px);
+}
